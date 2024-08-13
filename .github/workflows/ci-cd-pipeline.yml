@@ -1,0 +1,55 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16' # Adjust as needed
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: echo "Building the project..." # Replace with actual build commands
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16' # Adjust as needed
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: echo "Running tests..." # Replace with actual test commands
+
+      - name: Code quality checks
+        run: echo "Performing code quality checks..." # Replace with actual code quality commands
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to Staging
+        run: echo "Deploying to staging environment..." # Replace with actual deployment commands
